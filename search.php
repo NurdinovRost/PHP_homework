@@ -1,3 +1,4 @@
+
 <!doctype html>
 <head>
     <meta charset="utf-8">
@@ -27,13 +28,11 @@ $link = mysqli_init();
 if(!mysqli_real_connect($link, $host, $user, $password, $db)){
 	die("Connect Error: " . mysqli_connect_error());
 }
-
 if(isset($_GET['search1']) or isset($_GET['search2'])){
 	$input_str = $_GET['search1'];
 	$input_value = $_GET['search2'];
 	$input_str = str_replace("*", "_", $input_str);
 	$input_value = str_replace("*", "0", $input_value);
-
 	if(!is_numeric($input_value)){
 		$input_value = 0;
 	}
@@ -42,11 +41,10 @@ if(isset($_GET['search1']) or isset($_GET['search2'])){
 		  INNER JOIN Routes ON Busses.bus_ID = Routes.bus_ID
 		  WHERE class LIKE '%$input_str%' AND bulk >= $input_value
 		  ORDER BY bulk";
-
+		  
 	$result = $link->query($query);
     $result1 = $link->query($query);
     $len = count(mysqli_fetch_row($result1));
-
 	echo "<table border=1 width=30%>";
 	echo "<caption><strong>Информация</strong></caption>";
     echo "<tr>";
@@ -64,7 +62,6 @@ if(isset($_GET['search1']) or isset($_GET['search2'])){
 	}
 	echo "</table>";
 }
-
 ?>	
 
 
